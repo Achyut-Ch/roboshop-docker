@@ -1,0 +1,35 @@
+services:
+  catalogue:
+    build: ./catalogue # . means present working directory , goto catalogue and build the image
+    image: joindevops/catalogue:1.0.0
+    container_name: catalogue
+    depends_on:
+    - mongodb
+  user:
+    build: ./user
+    image: joindevops/user:1.0.0
+    container_name: user
+    depends_on:
+    - redis
+  frontend:
+    build: ./frontend
+    image: joindevops/frontend:1.0.0
+    container_name: frontend
+    ports:
+    - "80:80"
+    depends_on:
+    - catalogue
+    - user
+  mongodb:
+    build: ./mongodb
+    image: joindeviops/mongodb:1.0.0
+    container_name: mongodb
+  redis:
+    image: redis:7.0
+    container_name: redis
+
+networks:
+  default:
+    driver: bridge
+    name: roboshop
+    external: false #if it true , you need to create te network manually
