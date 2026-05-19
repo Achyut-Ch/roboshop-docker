@@ -1,20 +1,20 @@
 services:
   catalogue:
     build: ./catalogue # . means present working directory , goto catalogue and build the image
-    image: achyuth369/catalogue:1.0.0
+    image: joindevops/catalogue:1.0.0
     container_name: catalogue
     depends_on:
     - mongodb
   user:
     build: ./user
-    image: achyuth369/user:1.0.0
+    image: joindevops/user:1.0.0
     container_name: user
     depends_on:
     - redis
 
   cart: 
     build: ./cart
-    image: achyuth369/cart:1.0.0
+    image: joindevops/cart:1.0.0
     container_name: cart
     depends_on:
     - redis
@@ -22,14 +22,14 @@ services:
 
   shipping:
     build: ./shipping
-    image: achyuth369/shipping:1.0.0
+    image: joindevops/shipping:1.0.0
     container_name: shipping
     depends_on:
     - mysql
     - cart
   payment:
     build: ./payment
-    image: achyuth369/payment:1.0.0
+    image: joindevops/payment:1.0.0
     container_name: payment
     environment:
     - CART_HOST:"cart"
@@ -46,7 +46,7 @@ services:
 
   frontend:
     build: ./frontend
-    image: achyuth369/frontend:1.0.0
+    image: joindevops/frontend:1.0.0
     container_name: frontend
     ports:
     - "80:80"
@@ -58,14 +58,14 @@ services:
     - payment
   mongodb:
     build: ./mongodb
-    image: achyuth369/mongodb:1.0.0
+    image: joindevops/mongodb:1.0.0
     container_name: mongodb
   redis:
     image: redis:7.0
     container_name: redis
   mysql: 
     build: ./mysql
-    image: achyuth369/mysql:1.0.0
+    image: joindevops/mysql:1.0.0
     container_name: mysql
   rabbitmq:
     image: rabbitmq:3
