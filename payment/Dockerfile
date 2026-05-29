@@ -2,7 +2,7 @@ FROM python:3.9.25-alpine3.22
 WORKDIR /app
 RUN apk add --no-cache build-base linix-headers pcre-dev
 COPY requirements.txt .
-RUN pip3 install -r --prefix=/install -r requirements.txt
+RUN pip3.9 install -r --prefix=/install -r requirements.txt
 
 
 
